@@ -7,13 +7,12 @@ namespace MaxSubstring
         static void Main()
         {
             Console.WriteLine("Введите строку для поиска");
-            var output = GetMaxSubstring(Console.ReadLine());
 
-            Console.WriteLine($"Максимум одинаковых символов подряд: {output}");
+            Console.WriteLine($"Максимум одинаковых символов подряд: {GetMaxSubstringLength(Console.ReadLine())}");
             Console.ReadLine();
         }
 
-        private static double GetMaxSubstring(string input)
+        private static double GetMaxSubstringLength(string input)
         {
             if (input.Length <= 1)
             {
