@@ -25,7 +25,7 @@ namespace MaxSubstring
 
             for (var i = 1; i < input.Length; i++)
             {
-                substringLength = (lowercaseString[i] == lowercaseString[i - 1]) ? ++substringLength : 1;
+                substringLength = (lowercaseString[i] == lowercaseString[i - 1]) ? substringLength + 1 : 1;
 
                 if (substringLength > maxSubstringLength)
                 {
