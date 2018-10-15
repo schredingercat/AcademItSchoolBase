@@ -16,9 +16,10 @@ namespace Palindrome
 
         public static bool IsPalindrome(string input)
         {
+            var inputLowered = input.ToLower();
             for (int i = 0; i < input.Length; i++)
             {
-                if (GetNonSpaceSymbolByIndex(input.ToLower(), i) != GetNonSpaceSymbolByIndex(input.ToLower(), i, true))
+                if (GetLetterByIndexForward(inputLowered, i) != GetLetterByIndexBackward(inputLowered, i))
                 {
                     return false;
                 }
@@ -26,48 +27,58 @@ namespace Palindrome
             return true;
         }
 
-        public static string GetNonSpaceSymbolByIndex(string input, int index, bool backwards = false)
+        public static string GetLetterByIndexForward(string input, int index)
         {
             if (index < 0 || index > input.Length)
             {
                 return null;
             }
 
-            var nonSpaceCharNumber = 0;
+            var letterNumber = 0;
 
-            if (!backwards)
+            for (int i = 0; i < input.Length; i++)
             {
-                for (int i = 0; i < input.Length; i++)
+                if (!char.IsLetter(input[i]))
                 {
-                    if (char.IsWhiteSpace(input[i]))
-                    {
-                        continue;
-                    }
-
-                    if (nonSpaceCharNumber++ == index)
-                    {
-                        return input[i].ToString();
-                    }
+                    continue;
                 }
-            }
-            else
-            {
-                for (int i = input.Length - 1; i >= 0; i--)
+
+                if (letterNumber == index)
                 {
-                    if (char.IsWhiteSpace(input[i]))
-                    {
-                        continue;
-                    }
-
-                    if (nonSpaceCharNumber++ == index)
-                    {
-                        return input[i].ToString();
-                    }
+                    return input[i].ToString();
                 }
+
+                letterNumber++;
             }
 
             return null;
         }
 
+        public static string GetLetterByIndexBackward(string input, int index)
+        {
+            if (index < 0 || index > input.Length)
+            {
+                return null;
+            }
+
+            var letterNumber = 0;
+
+            for (int i = input.Length - 1; i >= 0; i--)
+            {
+                if (!char.IsLetter(input[i]))
+                {
+                    continue;
+                }
+
+                if (letterNumber == index)
+                {
+                    return input[i].ToString();
+                }
+
+                letterNumber++;
+            }
+
+            return null;
+        }
     }
 }
