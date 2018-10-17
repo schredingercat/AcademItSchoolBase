@@ -27,11 +27,11 @@ namespace Palindrome
             return true;
         }
 
-        public static string GetLetterByIndexForward(string input, int index)
+        public static char GetLetterByIndexForward(string input, int index)
         {
             if (index < 0 || index > input.Length)
             {
-                return null;
+                return char.MinValue;
             }
 
             var letterNumber = 0;
@@ -45,20 +45,20 @@ namespace Palindrome
 
                 if (letterNumber == index)
                 {
-                    return input[i].ToString();
+                    return input[i];
                 }
 
                 letterNumber++;
             }
 
-            return null;
+            return char.MinValue;
         }
 
-        public static string GetLetterByIndexBackward(string input, int index)
+        public static char GetLetterByIndexBackward(string input, int index)
         {
             if (index < 0 || index > input.Length)
             {
-                return null;
+                return char.MinValue;
             }
 
             var letterNumber = 0;
@@ -72,13 +72,13 @@ namespace Palindrome
 
                 if (letterNumber == index)
                 {
-                    return input[i].ToString();
+                    return input[i];
                 }
 
                 letterNumber++;
             }
 
-            return null;
+            return char.MinValue;
         }
     }
 }
