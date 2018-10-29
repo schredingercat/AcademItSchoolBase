@@ -20,8 +20,15 @@ namespace Sorting
 
             Console.WriteLine($"Начальный массив: {string.Join(", ", array)}");
 
-            Sort.SelectSort(array);
-            Console.WriteLine($"Сортировка выбором: {string.Join(", ", array)}");
+            
+            //Sort.SortSelect(array);
+            //Console.WriteLine($"Сортировка выбором: {string.Join(", ", array)}");
+
+            //Sort.SortBubble(array);
+            //Console.WriteLine($"Сортировка пузырьком: {string.Join(", ", array)}");
+
+            Sort.SortInsert(array);
+            Console.WriteLine($"Сортировка вставками: {string.Join(", ", array)}");
 
 
 
