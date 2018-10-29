@@ -27,8 +27,11 @@ namespace Sorting
             //Sort.SortBubble(array);
             //Console.WriteLine($"Сортировка пузырьком: {string.Join(", ", array)}");
 
-            Sort.SortInsert(array);
-            Console.WriteLine($"Сортировка вставками: {string.Join(", ", array)}");
+            //Sort.SortInsert(array);
+            //Console.WriteLine($"Сортировка вставками: {string.Join(", ", array)}");
+
+            Sort.SortQuick(array, 0, array.Length-1);
+            Console.WriteLine($"Быстрая сортировка: {string.Join(", ", array)}");
 
 
 

@@ -53,13 +53,72 @@ namespace Sorting
             for (int i = 1; i < length; i++)
             {
                 var temp = input[i];
-                var j = i-1;
-                while (j >= 0 && temp<input[j])
+                var j = i - 1;
+                while (j >= 0 && temp < input[j])
                 {
                     input[j + 1] = input[j];
                     j--;
                 }
                 input[j + 1] = temp;
+            }
+        }
+
+        public static void SortQuick(int[] input, int left, int right)
+        {
+            if (left == right)
+            {
+                return;
+            }
+
+            if (right - left == 1 && input[right] < input[left])
+            {
+                var temp = input[left];
+                input[left] = input[right];
+                input[right] = temp;
+                return;
+            }
+
+            var i = left;
+            var j = right;
+            var basic = input[(left + right) / 2];
+
+            while (i < j)
+            {
+                for (i = left; i <= right; i++)
+                {
+                    if (input[i] >= basic)
+                    {
+                        break;
+                    }
+                }
+
+                for (j = right; j >= left; j--)
+                {
+                    if (input[j] <= basic)
+                    {
+                        break;
+                    }
+                }
+
+                if (i <= j)
+                {
+                    var temp = input[j];
+                    input[j] = input[i];
+                    input[i] = temp;
+                    i++;
+                    j--;
+                    break;
+                }
+            }
+
+            if (i < right)
+            {
+                SortQuick(input, i, right);
+            }
+
+            if (j > left)
+            {
+                SortQuick(input, left, j);
             }
         }
 
