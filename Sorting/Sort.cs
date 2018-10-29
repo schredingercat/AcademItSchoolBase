@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sorting
+﻿namespace Sorting
 {
     class Sort
     {
-
         public static void SortSelect(int[] input)
         {
             var length = input.Length;
-            for (int i = 0; i < length; i++)
+            if (length <= 1)
+            {
+                return;
+            }
+
+            for (var i = 0; i < length; i++)
             {
                 var minIndex = FindMinIndex(input, i);
                 var temp = input[minIndex];
@@ -24,11 +21,16 @@ namespace Sorting
 
         public static void SortBubble(int[] input)
         {
+            if (input.Length <= 1)
+            {
+                return;
+            }
             var length = input.Length - 1;
-            for (int i = 0; i < length; i++)
+
+            for (var i = 0; i < length; i++)
             {
                 var isSorted = true;
-                for (int j = 0; j < length; j++)
+                for (var j = 0; j < length; j++)
                 {
                     if (input[j] > input[j + 1])
                     {
@@ -50,7 +52,12 @@ namespace Sorting
         {
             var length = input.Length;
 
-            for (int i = 1; i < length; i++)
+            if (length <= 1)
+            {
+                return;
+            }
+
+            for (var i = 1; i < length; i++)
             {
                 var temp = input[i];
                 var j = i - 1;
@@ -61,6 +68,15 @@ namespace Sorting
                 }
                 input[j + 1] = temp;
             }
+        }
+
+        public static void SortQuick(int[] input)
+        {
+            if (input.Length <= 1)
+            {
+                return;
+            }
+            SortQuick(input, 0, input.Length - 1);
         }
 
         public static void SortQuick(int[] input, int left, int right)
@@ -125,14 +141,13 @@ namespace Sorting
             }
         }
 
-
         public static int FindMinIndex(int[] input, int startIndex)
         {
             var minIndex = startIndex;
             var min = input[startIndex];
             var length = input.Length;
 
-            for (int i = startIndex; i < length; i++)
+            for (var i = startIndex; i < length; i++)
             {
                 if (input[i] < min)
                 {
@@ -140,9 +155,7 @@ namespace Sorting
                     minIndex = i;
                 }
             }
-
             return minIndex;
         }
-
     }
 }
