@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Sorting
     {
         static void Main(string[] args)
         {
-            var array = new int[10];
+            var array = new int[10000];
 
             var random = new Random();
             for (int i = 0; i < array.Length; i++)
@@ -18,21 +19,41 @@ namespace Sorting
                 array[i] = random.Next(100);
             }
 
-            Console.WriteLine($"Начальный массив: {string.Join(", ", array)}");
+            var array1 = (int[])array.Clone();
+            var array2 = (int[])array.Clone();
+            var array3 = (int[])array.Clone();
+            var array4 = (int[])array.Clone();
+            var array5 = (int[])array.Clone();
 
+            var timer = new Stopwatch();
             
-            //Sort.SortSelect(array);
-            //Console.WriteLine($"Сортировка выбором: {string.Join(", ", array)}");
+            //Console.WriteLine($"Оригинальный массив: {string.Join(", ", array)}");
 
-            //Sort.SortBubble(array);
-            //Console.WriteLine($"Сортировка пузырьком: {string.Join(", ", array)}");
+            timer.Start();
+            Sort.SortSelect(array1);
+            timer.Stop();
+            Console.WriteLine($"Сортировка выбором. Время: {timer.Elapsed}");
 
-            //Sort.SortInsert(array);
-            //Console.WriteLine($"Сортировка вставками: {string.Join(", ", array)}");
+            timer.Restart();
+            Sort.SortBubble(array2);
+            timer.Stop();
+            Console.WriteLine($"Сортировка пузырьком. Время: {timer.Elapsed}");
 
-            Sort.SortQuick(array, 0, array.Length-1);
-            Console.WriteLine($"Быстрая сортировка: {string.Join(", ", array)}");
+            timer.Restart();
+            Sort.SortInsert(array3);
+            timer.Stop();
+            Console.WriteLine($"Сортировка вставками. Время: {timer.Elapsed}");
 
+            timer.Restart();
+            Sort.SortQuick(array4, 0, array.Length-1);
+            timer.Stop();
+            Console.WriteLine($"Быстрая сортировка. Время: {timer.Elapsed}");
+            //Console.WriteLine($"Быстрая сортировка {string.Join(", ", array4)}");
+
+            timer.Restart();
+            Array.Sort(array5);
+            timer.Stop();
+            Console.WriteLine($"Стандартная сортировка. Время: {timer.Elapsed}");
 
 
             Console.ReadLine();

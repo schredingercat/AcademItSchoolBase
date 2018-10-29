@@ -84,7 +84,7 @@ namespace Sorting
 
             while (i < j)
             {
-                for (i = left; i <= right; i++)
+                for (; i <= right; i++)
                 {
                     if (input[i] >= basic)
                     {
@@ -92,7 +92,7 @@ namespace Sorting
                     }
                 }
 
-                for (j = right; j >= left; j--)
+                for (; j >= left; j--)
                 {
                     if (input[j] <= basic)
                     {
@@ -107,6 +107,9 @@ namespace Sorting
                     input[i] = temp;
                     i++;
                     j--;
+                }
+                else
+                {
                     break;
                 }
             }
