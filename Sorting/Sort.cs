@@ -141,6 +141,61 @@
             }
         }
 
+        public static void SortPyramid(int[] input)
+        {
+            var length = input.Length;
+
+            for (int i = length / 2 - 1; i >= 0; i--)
+            {
+                ShiftItem(input, i);
+            }
+
+            for (int i = 0; i < length; i++)
+            {
+                var temp = input[0];
+                input[0] = input[length - 1 - i];
+                input[length - 1 - i] = temp;
+                ShiftItem(input, 0, i + 1);
+            }
+        }
+
+        public static void ShiftItem(int[] input, int index, int sortedLength = 0)
+        {
+            var length = input.Length - sortedLength;
+            if (index >= length)
+            {
+                return;
+            }
+
+            var child1Index = 2 * index + 1;
+            var child2Index = 2 * index + 2;
+            int maxCildIndex;
+
+            if (child2Index >= length)
+            {
+                if (child1Index < length)
+                {
+                    maxCildIndex = child1Index;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                maxCildIndex = (input[child1Index] >= input[child2Index]) ? child1Index : child2Index;
+            }
+
+            if (input[index] < input[maxCildIndex])
+            {
+                var temp = input[maxCildIndex];
+                input[maxCildIndex] = input[index];
+                input[index] = temp;
+                ShiftItem(input, maxCildIndex, sortedLength);
+            }
+        }
+
         public static int FindMinIndex(int[] input, int startIndex)
         {
             var minIndex = startIndex;
