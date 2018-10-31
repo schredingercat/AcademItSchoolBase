@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearch", "BinarySearc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apartments", "Apartments\Apartments.csproj", "{7FF472A6-26D4-4177-AEE4-AC8D1E161EC2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextDate", "NextDate\NextDate.csproj", "{D1E2FA40-9BA2-4043-AA51-BEAAEB628138}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7FF472A6-26D4-4177-AEE4-AC8D1E161EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FF472A6-26D4-4177-AEE4-AC8D1E161EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FF472A6-26D4-4177-AEE4-AC8D1E161EC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1E2FA40-9BA2-4043-AA51-BEAAEB628138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1E2FA40-9BA2-4043-AA51-BEAAEB628138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1E2FA40-9BA2-4043-AA51-BEAAEB628138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1E2FA40-9BA2-4043-AA51-BEAAEB628138}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
