@@ -10,9 +10,20 @@
                 return;
             }
 
-            for (var i = 0; i < length; i++)
+            for (var i = 0; i < length-1; i++)
             {
-                var minIndex = FindMinIndex(input, i);
+                var minIndex = i;
+                var min = input[i];
+
+                for (var j = i; j < length; j++)
+                {
+                    if (input[j] < min)
+                    {
+                        min = input[j];
+                        minIndex = j;
+                    }
+                }
+                
                 var temp = input[minIndex];
                 input[minIndex] = input[i];
                 input[i] = temp;
@@ -76,6 +87,12 @@
             {
                 return;
             }
+
+            if (input.Length == 2 && input[0] <= input[1])
+            {
+                return;
+            }
+
             SortQuick(input, 0, input.Length - 1);
         }
 
@@ -194,23 +211,6 @@
                 input[index] = temp;
                 ShiftItem(input, maxCildIndex, sortedLength);
             }
-        }
-
-        public static int FindMinIndex(int[] input, int startIndex)
-        {
-            var minIndex = startIndex;
-            var min = input[startIndex];
-            var length = input.Length;
-
-            for (var i = startIndex; i < length; i++)
-            {
-                if (input[i] < min)
-                {
-                    min = input[i];
-                    minIndex = i;
-                }
-            }
-            return minIndex;
         }
     }
 }
