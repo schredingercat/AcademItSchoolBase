@@ -114,7 +114,7 @@
             var j = right;
             var basic = input[(left + right) / 2];
 
-            while (i < j)
+            while (true)
             {
                 for (; i <= right; i++)
                 {
