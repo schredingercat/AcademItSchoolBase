@@ -19,14 +19,9 @@
             {
                 right = middle - 1;
             }
-            else if (array[middle] < x)
+            else
             {
                 left = middle + 1;
-            }
-
-            if (left > right)
-            {
-                return -1;
             }
 
             return BinarySearch(array, left, right, x);
@@ -53,7 +48,7 @@
                 {
                     right = middle - 1;
                 }
-                else if (array[middle] < x)
+                else
                 {
                     left = middle + 1;
                 }
