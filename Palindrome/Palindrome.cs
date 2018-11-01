@@ -21,12 +21,17 @@ namespace Palindrome
             var lastIndexForward = 0;
             var lastIndexBackward = length;
 
-            for (int i = 0; i < length / 2; i++)
+            for (int i = 0; i < length; i++)
             {
                 if (GetLetterByIndexForward(inputLowered, i, lastIndexForward, out lastIndexForward)
                     != GetLetterByIndexBackward(inputLowered, i, lastIndexBackward, out lastIndexBackward))
                 {
                     return false;
+                }
+
+                if (lastIndexForward >= lastIndexBackward)
+                {
+                    return true;
                 }
             }
             return true;
