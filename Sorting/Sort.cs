@@ -10,7 +10,7 @@
                 return;
             }
 
-            for (var i = 0; i < length-1; i++)
+            for (var i = 0; i < length - 1; i++)
             {
                 var minIndex = i;
                 var min = input[i];
@@ -23,7 +23,7 @@
                         minIndex = j;
                     }
                 }
-                
+
                 var temp = input[minIndex];
                 input[minIndex] = input[i];
                 input[i] = temp;
@@ -88,11 +88,6 @@
                 return;
             }
 
-            if (input.Length == 2 && input[0] <= input[1])
-            {
-                return;
-            }
-
             SortQuick(input, 0, input.Length - 1);
         }
 
@@ -103,11 +98,15 @@
                 return;
             }
 
-            if (right - left == 1 && input[right] < input[left])
+            if (right - left == 1)
             {
-                var temp = input[left];
-                input[left] = input[right];
-                input[right] = temp;
+                if (input[right] < input[left])
+                {
+                    var temp = input[left];
+                    input[left] = input[right];
+                    input[right] = temp;
+                    return;
+                }
                 return;
             }
 
@@ -179,37 +178,42 @@
         public static void ShiftItem(int[] input, int index, int sortedLength = 0)
         {
             var length = input.Length - sortedLength;
-            if (index >= length)
+            while (true)
             {
-                return;
-            }
-
-            var child1Index = 2 * index + 1;
-            var child2Index = 2 * index + 2;
-            int maxCildIndex;
-
-            if (child2Index >= length)
-            {
-                if (child1Index < length)
-                {
-                    maxCildIndex = child1Index;
-                }
-                else
+                if (index >= length)
                 {
                     return;
                 }
-            }
-            else
-            {
-                maxCildIndex = (input[child1Index] >= input[child2Index]) ? child1Index : child2Index;
-            }
 
-            if (input[index] < input[maxCildIndex])
-            {
-                var temp = input[maxCildIndex];
-                input[maxCildIndex] = input[index];
-                input[index] = temp;
-                ShiftItem(input, maxCildIndex, sortedLength);
+                var child1Index = 2 * index + 1;
+                var child2Index = 2 * index + 2;
+                int maxCildIndex;
+
+                if (child2Index >= length)
+                {
+                    if (child1Index < length)
+                    {
+                        maxCildIndex = child1Index;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    maxCildIndex = (input[child1Index] >= input[child2Index]) ? child1Index : child2Index;
+                }
+
+                if (input[index] < input[maxCildIndex])
+                {
+                    var temp = input[maxCildIndex];
+                    input[maxCildIndex] = input[index];
+                    input[index] = temp;
+                    index = maxCildIndex;
+                    continue;
+                }
+                break;
             }
         }
     }
