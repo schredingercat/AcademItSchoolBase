@@ -116,7 +116,7 @@
 
             while (true)
             {
-                for (; i <= right; i++)
+                for (; i < right; i++)
                 {
                     if (input[i] >= basic)
                     {
@@ -124,7 +124,7 @@
                     }
                 }
 
-                for (; j >= left; j--)
+                for (; j > left; j--)
                 {
                     if (input[j] <= basic)
                     {
