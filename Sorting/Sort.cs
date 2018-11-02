@@ -1,4 +1,6 @@
-﻿namespace Sorting
+﻿using System;
+
+namespace Sorting
 {
     class Sort
     {
@@ -15,7 +17,7 @@
                 var minIndex = i;
                 var min = input[i];
 
-                for (var j = i; j < length; j++)
+                for (var j = i + 1; j < length; j++)
                 {
                     if (input[j] < min)
                     {
@@ -41,7 +43,7 @@
             for (var i = 0; i < length; i++)
             {
                 var isSorted = true;
-                for (var j = 0; j < length; j++)
+                for (var j = 0; j < length - i; j++)
                 {
                     if (input[j] > input[j + 1])
                     {
@@ -105,7 +107,6 @@
                     var temp = input[left];
                     input[left] = input[right];
                     input[right] = temp;
-                    return;
                 }
                 return;
             }
