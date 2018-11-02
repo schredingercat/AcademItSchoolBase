@@ -31,10 +31,6 @@
         {
             var left = 0;
             var right = array.Length - 1;
-            if (left > right)
-            {
-                return -1;
-            }
 
             while (left <= right)
             {
