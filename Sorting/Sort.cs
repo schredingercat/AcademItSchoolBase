@@ -187,13 +187,13 @@
 
                 var child1Index = 2 * index + 1;
                 var child2Index = 2 * index + 2;
-                int maxCildIndex;
+                int maxChildIndex;
 
                 if (child2Index >= length)
                 {
                     if (child1Index < length)
                     {
-                        maxCildIndex = child1Index;
+                        maxChildIndex = child1Index;
                     }
                     else
                     {
@@ -202,15 +202,15 @@
                 }
                 else
                 {
-                    maxCildIndex = (input[child1Index] >= input[child2Index]) ? child1Index : child2Index;
+                    maxChildIndex = (input[child1Index] >= input[child2Index]) ? child1Index : child2Index;
                 }
 
-                if (input[index] < input[maxCildIndex])
+                if (input[index] < input[maxChildIndex])
                 {
-                    var temp = input[maxCildIndex];
-                    input[maxCildIndex] = input[index];
+                    var temp = input[maxChildIndex];
+                    input[maxChildIndex] = input[index];
                     input[index] = temp;
-                    index = maxCildIndex;
+                    index = maxChildIndex;
                     continue;
                 }
                 break;
