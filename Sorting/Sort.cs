@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sorting
+﻿namespace Sorting
 {
     class Sort
     {
@@ -26,9 +24,8 @@ namespace Sorting
                     }
                 }
 
-                var temp = input[minIndex];
                 input[minIndex] = input[i];
-                input[i] = temp;
+                input[i] = min;
             }
         }
 
@@ -117,20 +114,14 @@ namespace Sorting
 
             while (true)
             {
-                for (; i < right; i++)
+                while (input[i] < basic)
                 {
-                    if (input[i] >= basic)
-                    {
-                        break;
-                    }
+                    i++;
                 }
 
-                for (; j > left; j--)
+                while (input[j] > basic)
                 {
-                    if (input[j] <= basic)
-                    {
-                        break;
-                    }
+                    j--;
                 }
 
                 if (i <= j)
