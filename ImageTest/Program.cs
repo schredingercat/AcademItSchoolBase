@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 
 namespace ImageTest
@@ -12,9 +11,23 @@ namespace ImageTest
 
             ToBlackAndWhite(image).Save("out_bw.png", System.Drawing.Imaging.ImageFormat.Png);
             Blur(image).Save("out_blur.png", System.Drawing.Imaging.ImageFormat.Png);
+            Sharpen(image).Save("out_sharp.png", System.Drawing.Imaging.ImageFormat.Png);
         }
 
         public static Bitmap Blur(Bitmap image)
+        {
+            var factor = (double)1 / 9;
+            var shaderMatrix = new[,] { { factor, factor, factor }, { factor, factor, factor }, { factor, factor, factor } };
+            return ShaderFiltration(image, shaderMatrix);
+        }
+
+        public static Bitmap Sharpen(Bitmap image)
+        {
+            var shaderMatrix = new double[,] { { 0, -1, 0 }, { -1, 5, -1 }, { 0, -1, 0 } };
+            return ShaderFiltration(image, shaderMatrix);
+        }
+
+        public static Bitmap ShaderFiltration(Bitmap image, double[,] shaderMatrix)
         {
             var width = image.Width;
             var height = image.Height;
@@ -24,33 +37,22 @@ namespace ImageTest
             {
                 for (int x = 1; x < width - 1; ++x)
                 {
-                    var pixels = new List<Color>();
+                    var rLevel = 0.0;
+                    var gLevel = 0.0;
+                    var bLevel = 0.0;
 
-                    for (int i = y - 1; i <= y + 1; i++)
+                    for (int i = y - 1, iFx = 0; i <= y + 1; i++, iFx++)
                     {
-                        for (int j = x - 1; j <= x + 1; j++)
+                        for (int j = x - 1, jFx = 0; j <= x + 1; j++, jFx++)
                         {
-                            pixels.Add(image.GetPixel(j, i));
+                            var pixel = image.GetPixel(j, i);
+                            rLevel += pixel.R * shaderMatrix[jFx, iFx];
+                            gLevel += pixel.G * shaderMatrix[jFx, iFx];
+                            bLevel += pixel.B * shaderMatrix[jFx, iFx];
                         }
                     }
 
-                    var rLevel = 0;
-                    var gLevel = 0;
-                    var bLevel = 0;
-
-                    foreach (var pixel in pixels)
-                    {
-                        rLevel += pixel.R;
-                        gLevel += pixel.G;
-                        bLevel += pixel.B;
-                    }
-
-                    rLevel = Saturate((double)rLevel / 9);
-                    gLevel = Saturate((double)gLevel / 9);
-                    bLevel = Saturate((double)bLevel / 9);
-
-                    Color newColor = Color.FromArgb(rLevel, gLevel, bLevel);
-
+                    Color newColor = Color.FromArgb(Saturate(rLevel), Saturate(gLevel), Saturate(bLevel));
                     resultImage.SetPixel(x, y, newColor);
                 }
             }
