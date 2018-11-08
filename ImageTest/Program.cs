@@ -69,7 +69,7 @@ namespace ImageTest
                 for (int x = 0; x < width; ++x)
                 {
                     Color pixel = image.GetPixel(x, y);
-                    var rgbLevel = Saturate(0.3 * pixel.R + 0.59 * pixel.G + 0.11 * pixel.B);
+                    var rgbLevel = (int)Math.Round(0.3 * pixel.R + 0.59 * pixel.G + 0.11 * pixel.B);
                     Color newColor = Color.FromArgb(rgbLevel, rgbLevel, rgbLevel);
 
                     resultImage.SetPixel(x, y, newColor);
