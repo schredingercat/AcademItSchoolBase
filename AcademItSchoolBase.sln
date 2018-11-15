@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextDate", "NextDate\NextDa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageTest", "ImageTest\ImageTest.csproj", "{15E35942-A167-484F-AD12-DC2B38E1AEF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deposit", "Deposit\Deposit.csproj", "{6CE60A86-1ACD-4900-BCE0-D336AC27969D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{15E35942-A167-484F-AD12-DC2B38E1AEF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15E35942-A167-484F-AD12-DC2B38E1AEF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15E35942-A167-484F-AD12-DC2B38E1AEF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CE60A86-1ACD-4900-BCE0-D336AC27969D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CE60A86-1ACD-4900-BCE0-D336AC27969D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CE60A86-1ACD-4900-BCE0-D336AC27969D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CE60A86-1ACD-4900-BCE0-D336AC27969D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
