@@ -29,6 +29,11 @@ namespace ImageTest
 
         public static Bitmap ShaderFiltration(Bitmap image, double[,] shaderMatrix)
         {
+            if (shaderMatrix.GetLength(0) != 3 || shaderMatrix.GetLength(1) != 3)
+            {
+                throw new ArgumentOutOfRangeException(nameof(shaderMatrix), "Матрица эффектов должна иметь размерность 3x3");
+            }
+
             var width = image.Width;
             var height = image.Height;
             var resultImage = new Bitmap(image);
