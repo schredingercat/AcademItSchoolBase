@@ -10,15 +10,43 @@ namespace ImageTest
             Bitmap image = new Bitmap("image.jpg");
 
             ToBlackAndWhite(image).Save("out_bw.png", System.Drawing.Imaging.ImageFormat.Png);
-            Blur(image).Save("out_blur.png", System.Drawing.Imaging.ImageFormat.Png);
+            Blur(image, 1).Save("out_blur.png", System.Drawing.Imaging.ImageFormat.Png);
+            Blur(image, 2).Save("out_blurExtra.png", System.Drawing.Imaging.ImageFormat.Png);
+            Darken(image).Save("out_dark.png", System.Drawing.Imaging.ImageFormat.Png);
             Sharpen(image).Save("out_sharp.png", System.Drawing.Imaging.ImageFormat.Png);
         }
 
-        public static Bitmap Blur(Bitmap image)
+        public static Bitmap Blur(Bitmap image, int strength)
         {
-            var factor = (double)1 / 9;
-            var shaderMatrix = new[,] { { factor, factor, factor }, { factor, factor, factor }, { factor, factor, factor } };
+            if (strength == 0)
+            {
+                return image;
+            }
+
+            var matrixSize = strength * 2 + 1;
+
+            if (strength < 0 || matrixSize > image.Width || matrixSize > image.Height)
+            {
+                throw new ArgumentOutOfRangeException(nameof(strength), "Значение силы эффекта должно быть больше или равно 0 и меньше половины размера изображения");
+            }
+
+            var factor = 1 / Math.Pow(matrixSize, 2);
+            var shaderMatrix = new double[matrixSize, matrixSize];
+
+            for (int i = 0; i < matrixSize; i++)
+            {
+                for (int j = 0; j < matrixSize; j++)
+                {
+                    shaderMatrix[j, i] = factor;
+                }
+            }
+
             return ShaderFiltration(image, shaderMatrix);
+        }
+
+        public static Bitmap Darken(Bitmap image)
+        {
+            return ShaderFiltration(image, new[,] { { 0.75 } });
         }
 
         public static Bitmap Sharpen(Bitmap image)
@@ -29,26 +57,35 @@ namespace ImageTest
 
         public static Bitmap ShaderFiltration(Bitmap image, double[,] shaderMatrix)
         {
-            if (shaderMatrix.GetLength(0) != 3 || shaderMatrix.GetLength(1) != 3)
+            var matrixSize = shaderMatrix.GetLength(0);
+            if (matrixSize % 2 == 0 || matrixSize != shaderMatrix.GetLength(1))
             {
-                throw new ArgumentOutOfRangeException(nameof(shaderMatrix), "Матрица эффектов должна иметь размерность 3x3");
+                throw new ArgumentOutOfRangeException(nameof(shaderMatrix), "Матрица эффектов должна быть квадратной матрицей нечетной размерности");
             }
 
             var width = image.Width;
             var height = image.Height;
+
+            if (width < matrixSize || height < matrixSize)
+            {
+                throw new ArgumentOutOfRangeException(nameof(shaderMatrix), "Матрица эффектов не должна быть больше размеров исходного изображения");
+            }
+
+            var margin = (matrixSize - 1) / 2;
+
             var resultImage = new Bitmap(image);
 
-            for (int y = 1; y < height - 1; ++y)
+            for (int y = margin; y < height - margin; ++y)
             {
-                for (int x = 1; x < width - 1; ++x)
+                for (int x = margin; x < width - margin; ++x)
                 {
                     var rLevel = 0.0;
                     var gLevel = 0.0;
                     var bLevel = 0.0;
 
-                    for (int i = y - 1, iFx = 0; i <= y + 1; i++, iFx++)
+                    for (int i = y - margin, iFx = 0; i <= y + margin; i++, iFx++)
                     {
-                        for (int j = x - 1, jFx = 0; j <= x + 1; j++, jFx++)
+                        for (int j = x - margin, jFx = 0; j <= x + margin; j++, jFx++)
                         {
                             var pixel = image.GetPixel(j, i);
                             rLevel += pixel.R * shaderMatrix[jFx, iFx];
