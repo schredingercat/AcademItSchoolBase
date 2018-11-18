@@ -14,7 +14,7 @@ namespace Deposit
             var rateInputIsCorrect = double.TryParse(Console.ReadLine(), NumberStyles.Any, CultureInfo.InvariantCulture, out double rate);
 
             Console.WriteLine("Введите срок вклада в месяцах");
-            var termInputIsCorrect = double.TryParse(Console.ReadLine(), NumberStyles.Any, CultureInfo.InvariantCulture, out double term);
+            var termInputIsCorrect = int.TryParse(Console.ReadLine(), out int term);
 
             if (!amountInputIsCorrect || !rateInputIsCorrect || !termInputIsCorrect || amount < 0 || rate < 0 || term < 0)
             {
@@ -31,13 +31,15 @@ namespace Deposit
             Console.ReadLine();
         }
 
-        public static double GetYield(double amount, double rate, double term)
+        public static double GetYield(double amount, double rate, int term)
         {
-            var months = (int)Math.Floor(term);
-            var percents = 1 + rate / 1200;
+            const int monthsInYear = 12;
+            const int hundredPercent = 100;
+
+            var percents = 1 + rate / (monthsInYear * hundredPercent);
             var result = 1.0;
 
-            for (int i = 0; i < months; ++i)
+            for (int i = 0; i < term; ++i)
             {
                 result *= percents;
             }
